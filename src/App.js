@@ -1,23 +1,39 @@
 import "./App.css";
+import Surround from "./surround.svg";
+import { useRef } from "react";
+import NavLogo from "./NavLogo.svg";
 function NavBar() {
+  const ham = useRef(null);
+  const navState = useRef(null);
+  const hamClick = () => {
+    navState.current.style.visibility === "hidden"
+      ? (navState.current.style.visibility = "visible")
+      : (navState.current.style.visibility = "hidden");
+  };
   return (
-    <nav>
-      <div>
-        <img alt="logo" />
-      </div>
-      <div className="links">
-        <a role="button" id="home">
-          HOME
-        </a>
-        <a role="button" id="events">
-          EVENTS
-        </a>
-        <a role="button" id="sponsors">
-          SPONSORS
-        </a>
-        <button id="brochure">BROCHURE</button>
-      </div>
-    </nav>
+    <>
+      <nav>
+        <div>
+          <img alt="logo" src={NavLogo} />
+        </div>
+
+        <button id="hamburger" ref={ham} onClick={hamClick}>
+          X
+        </button>
+        <div className="links" ref={navState}>
+          <a role="button" id="home">
+            HOME
+          </a>
+          <a role="button" id="events">
+            EVENTS
+          </a>
+          <a role="button" id="sponsors">
+            SPONSORS
+          </a>
+          <button id="brochure">BROCHURE</button>
+        </div>
+      </nav>
+    </>
   );
 }
 function Unite() {
@@ -177,10 +193,18 @@ function Sponsors() {
   ];
   return (
     <div className="sponsors">
-      <h1>SPONSORS</h1>
-      {sponsors_info.map((sponsor) => (
-        <img src={sponsor.logo} />
-      ))}
+      <center>
+        <div className="surrounder">
+          <img src={Surround} />
+          <h1>SPONSORS</h1>
+          <img src={Surround} />
+        </div>
+      </center>
+      <div className="sponsors-img">
+        {sponsors_info.map((sponsor) => (
+          <img src={sponsor.logo} />
+        ))}
+      </div>
     </div>
   );
 }
@@ -204,6 +228,9 @@ function OrganisingInstitutes() {
 function Footer() {
   return (
     <footer>
+      <center>
+        <h2>NORTHEAST Y20 CONCLAVE</h2>
+      </center>
       <div className="part-1">
         <div className="col">
           <b>ORGANISERS</b>
@@ -211,6 +238,7 @@ function Footer() {
           <a href="https://nits.ac.in/">
             National Institute of Technology, Silchar
           </a>
+          <a href="#">Assam University</a>
         </div>
         <div className="col">
           <b>CONTACTS</b>
@@ -224,6 +252,7 @@ function Footer() {
           <a>LinkedIn</a>
         </div>
       </div>
+      <center>&copy; Copyrights @ </center>
     </footer>
   );
 }
@@ -244,3 +273,4 @@ function App() {
 }
 
 export default App;
+
